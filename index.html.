@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkBot | O futuro das profissões</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: #080d25;
+  overflow-x: hidden;
+}
+
+/* AURORA ANIMADA */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(160deg, #080d25, #17143d, #092d3d);
+}
+
+.luz {
+  position: absolute;
+  width: 75vw;
+  height: 55vh;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.45;
+  animation: movimento 12s ease-in-out infinite alternate;
+}
+
+.luz1 {
+  background: #713cff;
+  top: -15%;
+  left: -15%;
+}
+
+.luz2 {
+  background: #087f91;
+  top: 25%;
+  right: -20%;
+  animation-delay: -4s;
+}
+
+.luz3 {
+  background: #277a65;
+  bottom: -25%;
+  left: 15%;
+  animation-delay: -7s;
+}
+
+@keyframes movimento {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(80px, 45px) scale(1.3);
+  }
+}
+
+/* BOTÃO DO MENU */
+.botao-menu {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 3000;
+  padding: 1px 15px;
+  border: 1px solid #7b8dcb;
+  border-radius: 9px;
+  background: #18234b;
+  color: white;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+/* BARRA LATERAL */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100vh;
+  padding: 75px 12px 20px;
+  display: block;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(9, 14, 37, 0.96);
+  border-right: 1px solid rgba(160, 180, 255, 0.3);
+  z-index: 2000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.recolhida {
+  transform: translateX(-100%);
+}
+
+
+.sidebar button {
+  width: 100%;
+  padding: 14px 10px;
+  color: white;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sidebar button:hover,
+.sidebar button.ativo {
+  background: #344d91;
+}
+
+/* CONTEÚDO */
+main {
+  margin-left: 220px;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+main.expandido {
+  margin-left: 0;
+}
+
+/* CABEÇALHO */
+header {
+  position: relative;
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 130px 30px 20px;
+  width: 300px;
+}
+
+.cabecalho-texto h1 {
+  margin: 0;
+  font-size: clamp(48px, 8vw, 76px);
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #83d8ff,
+    #b99aff,
+    #ffffff
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-shadow: 0 0 25px rgba(112, 173, 255, 0.25);
+  animation: brilhoTitulo 5s linear infinite;
+}
+
+@keyframes brilhoTitulo {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.cabecalho-texto p {
+  font-size: 17px;
+  color: #e2eaff;
+}
+
+/* MASCOTE ROBÔ */
+.robo {
+  position: absolute;
+  right: 150px;
+  top: 35px;
+  width: 50px;
+  height: 115px;
+}
+
+.cabeca {
+    position: absolute;
+    left:-12px;
+  width: 78px;
+  height: 65px;
+  margin: auto;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #e8f5ff, #8ebbe8);
+  border: 3px solid #5278b5;
+  position: relative;
+}
+
+.olhos {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 21px;
+}
+
+.olhos span {
+  width: 9px;
+  height: 13px;
+  border-radius: 50%;
+  background: #263c75;
+}
+
+.boca {
+  width: 22px;
+  height: 5px;
+  border-radius: 10px;
+  background: #5278b5;
+  margin: 9px auto;
+}
+
+.antena {
+  width: 5px;
+  height: 15px;
+  background: #8ebbe8;
+  margin: auto;
+}
+
+.antena:before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #a7f2d0;
+  transform: translate(-4px, -7px);
+}
+
+.corpo-robo {
+  width: px;
+  height: 38px;
+  margin: 4px auto;
+  border-radius: 12px;
+  background: #8ebbe8;
+  border: 3px solid #5278b5;
+  right:30;
+}
+
+/* PÁGINAS */
+.pagina {
+  display: none;
+  max-width: 1000px;
+  margin: 10px auto 40px;
+  padding: 25px;
+  border: 1px solid rgba(190, 210, 255, 0.2);
+  border-radius: 18px;
+  background: rgba(8, 15, 43, 0.72);
+  line-height: 1.7;
+}
+
+.pagina.ativa {
+  display: block;
+}
+
+h2 {
+  color: #a9dcff;
+}
+
+h3 {
+  color: #b9d6ff;
+}
+
+/* CARTÕES */
+.cartao {
+  padding: 18px;
+  margin: 15px 0;
+  border-radius: 12px;
+  background: rgba(115, 139, 220, 0.14);
+  border: 1px solid rgba(175, 194, 255, 0.2);
+}
+
+/* VÍDEOS */
+.grade-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.video {
+  padding: 17px;
+  border-radius: 12px;
+  background: rgba(100, 130, 210, 0.17);
+  border: 1px solid rgba(180, 200, 255, 0.2);
+}
+
+.video a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #a9e5ff;
+  font-weight: bold;
+}
+
+/* QUIZ */
+.opcao {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 13px;
+  border: 1px solid #8299d4;
+  border-radius: 9px;
+  background: #1b2b58;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+#resultado {
+    display: block;
+    min-height: 40px;
+    font-size: 20px;
+  font-weight: bold;
+  color: #b9f3d4;
+  background: black;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #c4d2ec;
+}
+
+@media (max-width: 650px) {
+  main {
+    margin-left: 0;
+    padding: 12px;
+  }
+
+  header {
+    min-height: 210px;
+    padding-right: 95px;
+  }
+
+  .robo {
+    right: 0;
+    transform: scale(0.8);
+  }
+
+  .pagina {
+    padding: 17px;
+  }
+}
+#dado {
+    width: 180px;
+    height: 180px;
+    margin: 30px auto;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 800px;
+}
+
+#numeroDado {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(135deg, #8b5cf6, #2563eb);
+    border: 3px solid white;
+    border-radius: 20px;
+    box-shadow: 0 0 25px #8b5cf6;
+}
+
+#dado.girando {
+    animation: girarDado 1.2s ease-in-out;
+}
+
+@keyframes girarDado {
+    from { transform: rotateX(0deg) rotateY(0deg); }
+    to { transform: rotateX(720deg) rotateY(720deg); }
+}
+#cenaDado {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="aurora">
+  <div class="luz luz1"></div>
+  <div class="luz luz2"></div>
+  <div class="luz luz3"></div>
+</div>
+
+<button class="botao-menu" onclick="alternarMenu()">☰</button>
+
+<nav class="sidebar" id="menu">
+  <button class="ativo" onclick="abrirAba('inicio', this)">🏠 WorkBot</button>
+  <button onclick="abrirAba('profissoes', this)">🎓Aprender Profissões</button>
+  <button onclick="abrirAba('linhaTempo', this)">📜Linha do Tempo Digital</button>
+  <button onclick="abrirAba('quiz', this)">🎲Dado Tech-Quiz</button>
+</nav>
+
+<main id="conteudo">
+
+<header>
+  <div class="cabecalho-texto">
+    <h1>WorkBot</h1>
+    <p>Descubra as profissões e explore o futuro do trabalho!</p>
+  </div>
+
+  <div class="robo">
+    <div class="antena"></div>
+    <div class="cabeca">
+      <div class="olhos">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="boca"></div>
+    </div>
+    <div class="corpo-robo"></div>
+  </div>
+</header>
+
+<!-- INÍCIO -->
+<section id="inicio" class="pagina ativa">
+  <h2>I'm WorkBot</h2>
+
+  <p>
+    O projeto WorkBot foi criado em razão da feira de ciências 2026.
+    Como o tema da sala 702 é "Evolução das profissões: da automação à IA", eu, Murilo,
+    sou o responsável da turma para fazer com que a interação humana-tecnológica ocorra.
+    Além do site, fiz um robôzinho chamado WorkBot na impressora 3D, que é o mascote do projeto.
+  </p>
+
+  <p>
+    Neste projeto, você vai conhecer a história das profissões,
+    entender a chegada dos computadores e descobrir como
+    a inteligência artificial pode influenciar o futuro.
+  </p>
+
+  <div class="cartao">
+    <h3>O que você encontrará aqui?</h3>
+    <p>Conhecimento, história, tecnologia e descobertas sobre o trabalho.</p>
+  </div>
+</section>
+
+<!-- APRENDER PROFISSÕES -->
+<section id="profissoes" class="pagina">
+  <h2>Aprender Profissões</h2>
+
+  <div class="cartao">
+    <h3>1. A origem das profissões</h3>
+    <p>
+      Desde as primeiras sociedades, as pessoas dividiam tarefas
+      para conseguir alimentos, construir moradias, produzir
+      ferramentas e organizar a vida em comunidade.
+      Com o tempo, essas atividades se especializaram e deram
+      origem a diversas profissões.
+    </p>
+  </div>
+
+  <div class="cartao">
+    <h3>2. A evolução ao longo do tempo</h3>
+    <p>
+      A agricultura, o comércio, o artesanato e a indústria
+      transformaram as formas de trabalho. A Revolução Industrial
+      trouxe máquinas e fábricas, mudando profundamente
+      a organização profissional.
+    </p>
+  </div>
+
+  <div class="cartao">
+    <h3>3. As profissões na atualidade</h3>
+    <p>
+      Hoje existem profissionais em áreas como medicina,
+      educação, engenharia, agricultura, informática,
+      comunicação e ciência. Muitas profissões exigem
+      formação especializada e atualização constante.
+    </p>
+  </div>
+
+  <div class="cartao">
+    <h3>4. O impacto da inteligência artificial</h3>
+    <p>
+      A inteligência artificial pode analisar informações,
+      reconhecer padrões e auxiliar em diversas tarefas.
+      Ela pode transformar atividades profissionais,
+      criar oportunidades e exigir novas habilidades.
+      Seu uso também envolve responsabilidade e ética.
+    </p>
+  </div>
+
+  </div>
+</section>
+
+<!-- LINHA DO TEMPO -->
+<section id="linhaTempo" class="pagina">
+  <h2>Linha do Tempo Digital</h2>
+
+  <div class="cartao">
+    <h3>Antiguidade</h3>
+    <p>Como não havia máquinas nem computadores na antiguidade, essas foram algumas das primeiras profissões:
+    agricultores, artesãos, comerciantes e construtores.</p>
+  </div>
+
+  <div class="cartao">
+    <h3>Idade Média</h3>
+    <p>Mesmo que ainda não existisse máquinas nem computadores, a Idade Média foi quando surgiram várias idéias graças ao Renascimento. Algumas 
+    profissões características da época eram os ferreiros, tecelões, agricultores e comerciantes.</p>
+  </div>
+
+  <div class="cartao">
+    <h3>Revolução Industrial</h3>
+    <p>Na Revolução Industrial, foi criada as máquinas a vapor. Então, para elas se desempenharem bem, surgiram profissões como operários, mecânicos e trabalhadores das fábricas.</p>
+  </div>
+
+  <div class="cartao">
+    <h3>Século XX</h3>
+    <p> Finalmente, a eletricidade e os computadores foram criados. Surgiram profissões ligadas à eletricidade, informática e telecomunicações.</p>
+  </div>
+
+  <div class="cartao">
+    <h3>Século XXI</h3>
+    <p>A tecnologia se desenvolveu mais ainda, principalmente com o surgimento da inteligência artificial.
+    As profissões são desenvolvedores, cientistas de dados e especialistas em tecnologia.</p>
+  </div>
+
+  <div class="cartao">
+    <h3>O futuro</h3>
+    <p>Novas profissões podem surgir com a robótica e a inteligência artificial.</p>
+  </div>
+  
+  <div class="cartao"
+  <h3>Para mais informações, consulte o Murilo ou os alunos da 702.</h3>
+  </div>
+</section>
+
+<!-- DADO TECH - QUIZ -->
+<section id="quiz" class="pagina">
+<h2>Dado Tech-Quiz</h2>
+<p>Lance o dado e descubra qual pergunta deverá responder! Caso acerte a pergunta, você ganhará uma surpresa!</p>
+
+<div id="dado">
+    <canvas id="cenaDado">?</canvas>
+</div>
+<p id="resultadoDado">Número Sorteado: ?</p>
+<button onclick="sortearDado()">Lançar dado</button>
+</section>
+
+<footer>
+  <p>WorkBot | Projeto educativo</p>
+  <p>Desenvolvido por Murilo</p>
+</footer>
+
+</main>
+
+<script>
+    function alternarMenu() {
+    document.querySelector(".sidebar").classList.toggle("recolhida");
+}
+    function abrirAba(id, botao) {
+    document.querySelectorAll(".pagina").forEach(pagina => {
+        pagina.classList.remove("ativa");
+    });
+
+    document.querySelectorAll(".sidebar button").forEach(button => {
+        button.classList.remove("ativo");
+    });
+
+    document.getElementById(id).classList.add("ativa");
+    botao.classList.add("ativo");
+}
+const phi = (1 + Math.sqrt(5)) / 2;
+
+const vertices = [
+    [-1, phi, 0], [1, phi, 0],
+    [-1, -phi, 0], [1, -phi, 0],
+    [0, -1, phi], [0, 1, phi],
+    [0, -1, -phi], [0, 1, -phi],
+    [phi, 0, -1], [phi, 0, 1],
+    [-phi, 0, -1], [-phi, 0, 1]
+];
+
+const faces = [];
+
+for (let a = 0; a < 12; a++) {
+    for (let b = a + 1; b < 12; b++) {
+        for (let c = b + 1; c < 12; c++) {
+            const A = vertices[a];
+            const B = vertices[b];
+            const C = vertices[c];
+
+            const u = B.map((v, i) => v - A[i]);
+            const v = C.map((x, i) => x - A[i]);
+
+            const normal = [
+                u[1] * v[2] - u[2] * v[1],
+                u[2] * v[0] - u[0] * v[2],
+                u[0] * v[1] - u[1] * v[0]
+            ];
+
+            const lados = vertices
+                .filter((_, i) => i !== a && i !== b && i !== c)
+                .map(P => normal.reduce(
+                    (s, n, i) => s + n * (P[i] - A[i]), 0
+                ));
+
+            if (lados.every(x => x >= -0.0001) ||
+                lados.every(x => x <= 0.0001)) {
+                faces.push([a, b, c]);
+            }
+        }
+    }
+}
+const canvas = document.getElementById("cenaDado");
+const ctx = canvas.getContext("2d");
+
+let rotacaoX = 0.5;
+let rotacaoY = 0.5;
+
+function desenharDado() {
+    canvas.width = 300;
+    canvas.height = 300;
+    ctx.clearRect(0, 0, 300, 300);
+
+    const escala = 65;
+
+    const pontos = vertices.map(p => {
+        const x = p[0];
+        const y = p[1];
+        const z = p[2];
+
+        const y1 = y * Math.cos(rotacaoX) - z * Math.sin(rotacaoX);
+        const z1 = y * Math.sin(rotacaoX) + z * Math.cos(rotacaoX);
+
+        const x2 = x * Math.cos(rotacaoY) + z1 * Math.sin(rotacaoY);
+        const z2 = -x * Math.sin(rotacaoY) + z1 * Math.cos(rotacaoY);
+
+        const perspectiva = 400 / (400 + z2 * escala);
+
+        return [
+            150 + x2 * escala * perspectiva,
+            150 + y1 * escala * perspectiva,
+            z2
+        ];
+    });
+
+    faces
+        .map(face => ({
+            face,
+            profundidade: face.reduce((s, i) => s + pontos[i][2], 0) / 3
+        }))
+        .sort((a, b) => a.profundidade - b.profundidade)
+        .forEach(item => {
+            const [a, b, c] = item.face;
+
+            ctx.beginPath();
+            ctx.moveTo(pontos[a][0], pontos[a][1]);
+            ctx.lineTo(pontos[b][0], pontos[b][1]);
+            ctx.lineTo(pontos[c][0], pontos[c][1]);
+            ctx.closePath();
+
+            ctx.fillStyle = item.profundidade > 0
+                ? "#a78bfa" : "#49318f";
+            ctx.fill();
+
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        });
+}
+desenharDado();
+function sortearDado() {
+    const numero = Math.floor(Math.random() * 20) + 1;
+    const dado = document.getElementById("dado");
+
+    dado.classList.remove("girando");
+    void dado.offsetWidth;
+    dado.classList.add("girando");
+
+    setTimeout(() => {
+        desenharDado();
+        document.getElementById("resultadoDado").textContent =
+    "Número sorteado: " + numero;
+        dado.classList.remove("girando");
+    }, 1200);
+}
+</script>
+</body>
+  </html>
+  
